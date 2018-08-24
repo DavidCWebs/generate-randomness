@@ -1,6 +1,8 @@
 Randomness with Libgcrypt
 =========================
+Educational project using libgcrypt to generate random strings.
 
+Under Linux, this uses `/dev/urandom`.
 
 ## Resources
 * [Wiki article][1]
