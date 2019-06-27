@@ -22,5 +22,6 @@ int generateRandom(unsigned char *buf, size_t length, int printable)
             buf[i++] = tmp[0];
         }
     }
+    buf[length] = 0;
     return 0;
 }
