@@ -18,7 +18,18 @@ At the moment, I've included random number generation by means of libgcrypt, and
 * Has access to raw device entropy
 * Won't share state between applications
 
-## Resources
+
+OpenSSL
+-------
+C project that uses the `<openssl/rand.h>` library to generate random data. I found this a bit tricky to set up.
+
+Note that in the `Makefile`, `cc` requires `-lssl -lcrypto` flags.
+
+[RAND_][7]:s used to check for sufficient entropy. Note issues re: [libgcrypt entropy loss][8]
+
+Resources
+---------
+
 * [/dev/random vs /dev/urandom][6]
 * [Base 64 Wiki article][1]
 * [RFC 1421][2]: Privacy Enhancement for Internet Electronic Mail: Part I: Message Encryption and Authentication Procedures
@@ -29,3 +40,6 @@ At the moment, I've included random number generation by means of libgcrypt, and
 [4]: https://en.wikiquote.org/wiki/John_von_Neumann
 [5]: https://github.com/DavidCWebs/radix-64-encoding
 [6]: https://sockpuppet.org/blog/2014/02/25/safely-generate-random-numbers/
+[7]: https://www.openssl.org/docs/manmaster/man3/RAND_add.html
+[8]: https://formal.iti.kit.edu/~klebanov/pubs/libgcrypt-cve-2016-6313.pdf
+
