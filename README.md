@@ -20,15 +20,28 @@ At the moment, I've included random number generation by means of the libgcrypt 
 * Has access to raw device entropy
 * Won't share state between applications
 
-Most userspace random
+Most userspace random number generators ultimately rely on `/dev/urandom` in any case - so in your own applications you should consider accessing the API directly rather than through a userspace library like openSSL or libgcrypt.
 
 Access /dev/urandom in C
 ------------------------
 A pretty simple way to access `/dev/urandom` randomness in C is to `fopen()` the file and read the required number of bytes. See [urandom-c/main.c][9]. 
 
-Randnomness in BASH
--------------------
-Don't use the [`$RANDOM` internal Bash function][10] 
+Randomness in BASH
+------------------
+You can get good randomness directly from the shell.
+
+For anything that requires even slight security, __do not__ use the [`$RANDOM` internal Bash function][10].
+
+For cryptographically secure random numbers, grab bytes from `/dev/urandom`. You can then represent these bytes as printable characters by converting to base 64 or hexadecimal characters:
+
+```bash
+# Get 12 random bytes from /dev/urandom, output in base 64 encoding.
+n=12
+echo $(head -c $n /dev/urandom | base64)
+
+# Get 12 random bytes as above, output as hex characters.
+head -c $n /dev/urandom | xxd -ps
+```
 
 OpenSSL
 -------
