@@ -46,9 +46,13 @@ If you want to generate a set of random words, you can use a random number sourc
 
 C++
 ---
-I've found quite a few comments on Stack Overflow in response to people asking for advice on accessing `/dev/urandom` that basically say "Why not just use an established library like OpenSSL?"
+I've found quite a few comments on Stack Overflow in response to people asking for advice on accessing `/dev/urandom` in C++ that basically say "Why not just use an established library like OpenSSL?"
 
-I'm not a cryptographer but I don't necessarily agree with this. If you just need some bytes that are cryptographically secure, it's pretty easy just to fetch them from `/dev/urandom`. If you're using Linux (this repo is Linux-focused), this provides you access to the Kernel's random number generator. Effectively, accessing this file is an API to the Kernel's cryptographically secure source of randomness. In my opinion, this does not count as _rolling your own_ crypto. Rolling your own crypto is a **bad thing**.
+I'm not a cryptographer but I don't necessarily agree with this. If you just need some bytes that are cryptographically secure, it's pretty easy just to fetch them from `/dev/urandom`.
+
+If you're using Linux (this repo is Linux-focused), `/dev/urandom` provides you access to the Kernel's random number generator. Effectively, accessing this file is an API to the Kernel's cryptographically secure source of randomness.
+
+In my opinion, this does not count as _rolling your own_ crypto. Rolling your own crypto is a **bad thing** and you shouldn't do it.
 
 ```c++
 ...
