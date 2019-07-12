@@ -44,6 +44,31 @@ For anything that requires even slight security, __do not__ use the [`$RANDOM` i
 
 If you want to generate a set of random words, you can use a random number sourced from `/dev/urandom` to lookup a word by line number in a word list provided by  the OS. In Debian/Ubuntu Linux, the `/usr/share/dict/words` file contains 99171 words, each on a separate line. [Example Bash script for creating pseudo-random word list][13].
 
+C++
+---
+I've found quite a few comments on Stack Overflow in response to people asking for advice on accessing `/dev/urandom` that basically say "Why not just use an established library like OpenSSL?"
+
+I'm not a cryptographer but I don't necessarily agree with this. If you just need some bytes that are cryptographically secure, it's pretty easy just to fetch them from `/dev/urandom`. If you're using Linux (this repo is Linux-focused), this provides you access to the Kernel's random number generator. Effectively, accessing this file is an API to the Kernel's cryptographically secure source of randomness. In my opinion, this does not count as _rolling your own_ crypto. Rolling your own crypto is a **bad thing**.
+
+```c++
+...
+// Get 32 bytes of randomness and display them as hexadecimal characters
+int n = 32;
+std::ifstream file("/dev/urandom", std::ios::binary|std::ios::in);
+if (!file) {
+	std::cerr << "Couldn't open /dev/urandom. Exiting..." << '\n';
+	return 1;
+}
+std::vector<char> randomBytes(n);
+file.read(&randomBytes[0], n);
+for (auto& el : randomBytes)
+	std::cout << std::setfill('0') << std::setw(2) << std::hex << (0xff & (unsigned int)el);
+std::cout << '\n';
+```
+For a working example, see [cpp][14]. 
+
+Compiling/linking OpenSSL just to get randomness is possibly overkill. You could argue that such libraries make the source of randomness somewhat obscure. Yes, they are tested - but it can be difficult to track down exactly _where_ randomness comes from. Get ready for forensic coding if you want to work this out.
+
 OpenSSL
 -------
 C project that uses the `<openssl/rand.h>` library to generate random data. I found this a bit tricky to set up.
@@ -80,3 +105,4 @@ Resources
 [11]: https://bitcoin.org/en/alert/2013-08-11-android
 [12]: https://github.com/torvalds/linux/blob/master/drivers/char/random.c
 [13]: bash/random-words
+[14]: cpp
