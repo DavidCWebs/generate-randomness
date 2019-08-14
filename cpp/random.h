@@ -4,8 +4,6 @@
 #include <vector>
 #include <iostream>
 #include <fstream>
-#include <algorithm>	// std::generate
-#include <functional>	// std::function
 
 class Random
 {
@@ -24,7 +22,6 @@ public:
 private:
 	size_t nBytes;
 	std::vector<unsigned char> randomBytes;
-
 
 };
 
