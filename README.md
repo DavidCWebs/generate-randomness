@@ -94,6 +94,10 @@ Resources
 * [Entropy Loss & Predictability, Libgcrypt PRNG][8]
 * [Bash `$RANDOM` function][10]
 * [Weak PRNG affected Android Bitcoin wallets in 2013][11]
+* [Insane Coding: Dealing with Randomness][15]
+* [Secure Programming Cookbook][16]
+* [Practical Random Number Generation in Software][17]
+* [How /dev/random might be improved][18]
 
 
 [1]: https://en.wikipedia.org/wiki/Base64
@@ -110,3 +114,7 @@ Resources
 [12]: https://github.com/torvalds/linux/blob/master/drivers/char/random.c
 [13]: bash/random-words
 [14]: cpp
+[15]: https://insanecoding.blogspot.com/2014/05/dealing-with-randomness.html
+[16]: https://www.amazon.co.uk/Secure-Programming-Cookbook-Cryptography-Authentication/dp/0596003943/ref=sr_1_fkmr1_1?keywords=secure+coding+cookbook&qid=1567798258&s=gateway&sr=8-1-fkmr1
+[17]: https://www.acsac.org/2003/papers/79.pdf
+[18]: http://jlcooke.ca/random/
