@@ -1,6 +1,6 @@
 Randomness in Linux
 ===================
-Educational project using various methods to generate pseudo random numbers/strings that are cryptograpically secure.
+This project uses various methods to generate pseudo random numbers/strings that are cryptograpically secure.
 
 Random numbers have many important uses in applied cryptography. Yet you can't compute true randomness arithmetically:
 
